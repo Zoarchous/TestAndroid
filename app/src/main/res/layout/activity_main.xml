@@ -96,6 +96,12 @@
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
                 />
+            <Button
+                android:id="@+id/add_image_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="add"
+                />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
