@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TestAndroid</string>
+    <string name="locations_text_view">ЛОКАЦИИ</string>
+    <string name="section_name_hint">Название</string>
+</resources>
