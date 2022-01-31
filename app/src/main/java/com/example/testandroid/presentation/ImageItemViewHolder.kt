@@ -5,6 +5,6 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testandroid.R
 
-class ImageItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+class ImageItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val photo: ImageView = view.findViewById(R.id.image_item)
 }

@@ -10,12 +10,6 @@ object ImagesListRepositoryImpl: ImagesListRepository {
     private var autoIncrementId = 0
     private val imagesListLD = MutableLiveData<List<ImageItem>>()
 
-    init {
-        for (i in 0 until 6){
-            val item = ImageItem(i,"https://picsum.photos/id/$i/200/200")
-            addImageItem(item)
-        }
-    }
 
     override fun addImageItem(item: ImageItem) {
         if (item.id == ImageItem.UNDEFINED_ID){
