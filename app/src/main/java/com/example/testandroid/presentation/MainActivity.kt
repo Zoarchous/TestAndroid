@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testandroid.R
 import com.example.testandroid.domain.ImageItem
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.net.URI
 
 const val REQUEST_CODE = 100
@@ -27,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.imagesList.observe(this){
             recyclerViewAdapter.submitList(it)
         }
-        val addButton = findViewById<Button>(R.id.add_image_button)
+        val addButton = findViewById<ImageButton>(R.id.add_image_button)
 
         addButton.setOnClickListener {
             val galleryIntent = Intent(

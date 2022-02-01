@@ -27,7 +27,6 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
         val imageItem = getItem(position)
         Picasso.get().apply { isLoggingEnabled = true }
             .load(imageItem.photo)
-            .placeholder(R.drawable.ic_launcher_background)
             .into(viewHolder.photo)
     }
 

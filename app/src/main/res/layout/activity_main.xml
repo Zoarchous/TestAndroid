@@ -53,6 +53,7 @@
                 android:inputType="textCapWords" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/location_name_cardView"
         android:layout_width="match_parent"
@@ -68,16 +69,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <EditText
-                android:id="@+id/location_name_editText"
+            android:orientation="vertical"
+            android:background="@color/light_gray">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <EditText
+                android:id="@+id/location_name_editText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:hint="@string/section_name_hint"
                 android:gravity="start"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="@color/light_gray"
+                android:background="@android:color/transparent"
                 android:layout_marginTop="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/default_margin"
                 android:layout_marginStart="@dimen/default_margin"
@@ -85,6 +92,17 @@
                 android:textSize="20sp"
                 android:inputType="textCapWords"
                 />
+                <ImageButton
+                    android:id="@+id/add_image_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/half_margin"
+                    android:src="@drawable/ic_add_photo"
+                    android:background="@android:color/transparent"
+                    />
+            </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/images_recycler_view"
                 android:layout_width="match_parent"
@@ -96,12 +114,7 @@
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
                 />
-            <Button
-                android:id="@+id/add_image_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="add"
-                />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
