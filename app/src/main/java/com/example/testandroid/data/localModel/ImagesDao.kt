@@ -11,9 +11,9 @@ import kotlinx.coroutines.selects.select
 @Dao
 interface ImagesDao {
     @Query ("SELECT * FROM images" )
-    fun getAllImages(): LiveData<List<ImageItem>>
+    suspend fun getAllImages(): MutableList<ImageItem>
     @Insert
-    fun insertImage (image: ImageItem)
+    suspend fun insertImage (image: ImageItem)
     @Query ("DELETE FROM images")
-    fun clearImagesDatabase()
+    suspend fun clearImagesDatabase()
 }

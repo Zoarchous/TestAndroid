@@ -14,6 +14,9 @@ import com.example.testandroid.R
 import com.example.testandroid.data.localModel.AppDataBase
 import com.example.testandroid.domain.ImageItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.net.URI
 
 const val REQUEST_CODE = 100
@@ -21,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var recyclerViewAdapter: RecyclerViewAdapter
     private var imageUri: Uri? = null
+    val scope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +58,9 @@ class MainActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             imageUri = data?.data
             val image = ImageItem(imageUri.toString())
-            viewModel.addImageItem(image)
+            scope.launch {
+                viewModel.addImageItem(image)
+            }
         }
     }
 
