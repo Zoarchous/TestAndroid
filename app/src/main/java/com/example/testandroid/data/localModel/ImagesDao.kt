@@ -2,6 +2,7 @@ package com.example.testandroid.data.localModel
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.testandroid.domain.ImageItem
@@ -13,4 +14,6 @@ interface ImagesDao {
     fun getAllImages(): LiveData<List<ImageItem>>
     @Insert
     fun insertImage (image: ImageItem)
+    @Query ("DELETE FROM images")
+    fun clearImagesDatabase()
 }

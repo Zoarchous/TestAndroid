@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testandroid.R
+import com.example.testandroid.data.localModel.AppDataBase
 import com.example.testandroid.domain.ImageItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.net.URI
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupRecyclerView()
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        setupViewModel()
         viewModel.imagesList.observe(this){
             recyclerViewAdapter.submitList(it)
         }
@@ -55,5 +56,12 @@ class MainActivity : AppCompatActivity() {
             val image = ImageItem(imageUri.toString())
             viewModel.addImageItem(image)
         }
+    }
+
+    private fun setupViewModel(){
+        val application = requireNotNull(this).application
+        val dataSource = AppDataBase.getInstance(this).imagesDao()
+        val viewModelFactory = MainViewModelFactory(dataSource, application)
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
     }
 }
