@@ -1,10 +1,7 @@
 package com.example.testandroid.data.localModel
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.testandroid.domain.ImageItem
 import kotlinx.coroutines.selects.select
 
@@ -12,8 +9,11 @@ import kotlinx.coroutines.selects.select
 interface ImagesDao {
     @Query ("SELECT * FROM images" )
     suspend fun getAllImages(): MutableList<ImageItem>
-    @Insert
+
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    @Transaction
     suspend fun insertImage (image: ImageItem)
+
     @Query ("DELETE FROM images")
     suspend fun clearImagesDatabase()
 }

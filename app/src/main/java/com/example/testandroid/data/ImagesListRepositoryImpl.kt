@@ -24,6 +24,6 @@ object ImagesListRepositoryImpl: ImagesListRepository {
     }
 
     private fun updateList(){
-        imagesListLD.value = imagesList.toList()
+        imagesListLD.postValue(imagesList.toList())
     }
 }

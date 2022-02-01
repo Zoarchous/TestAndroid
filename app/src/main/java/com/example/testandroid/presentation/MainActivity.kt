@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testandroid.R
 import com.example.testandroid.data.localModel.AppDataBase
+import com.example.testandroid.data.localModel.ImagesDao
 import com.example.testandroid.domain.ImageItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerViewAdapter: RecyclerViewAdapter
     private var imageUri: Uri? = null
     val scope = CoroutineScope(Dispatchers.IO)
-
+    private lateinit var dataSource: ImagesDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewModel(){
         val application = requireNotNull(this).application
-        val dataSource = AppDataBase.getInstance(this).imagesDao()
+        dataSource = AppDataBase.getInstance(this).imagesDao()
         val viewModelFactory = MainViewModelFactory(dataSource, application)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
     }

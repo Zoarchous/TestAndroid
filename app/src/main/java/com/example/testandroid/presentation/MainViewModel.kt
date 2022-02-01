@@ -1,6 +1,7 @@
 package com.example.testandroid.presentation
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.testandroid.data.ImagesListRepositoryImpl
 import com.example.testandroid.data.localModel.ImagesDao
@@ -20,6 +21,8 @@ class MainViewModel (val imagesDatabase: ImagesDao, application: Application): V
     private val addImageItemUseCase = AddImageItemUseCase(repository)
 
     val imagesList = getImagesListUseCase.getImagesList()
+
+
 
     suspend fun addImageItem (image: ImageItem){
         scope.launch {
