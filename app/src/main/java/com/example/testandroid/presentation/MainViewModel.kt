@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.testandroid.data.ImagesListRepositoryImpl
+import com.example.testandroid.data.localModel.AppDataBase
 import com.example.testandroid.data.localModel.ImagesDao
 import com.example.testandroid.domain.AddImageItemUseCase
 import com.example.testandroid.domain.GetImagesListUseCase
@@ -12,10 +13,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel (val imagesDatabase: ImagesDao, application: Application): ViewModel() {
+class MainViewModel (application: Application): ViewModel() {
     private val repository = ImagesListRepositoryImpl
+    private val db = AppDataBase.getInstance(application)
 
-    val scope = CoroutineScope(Dispatchers.IO)
+    private val scope = CoroutineScope(Dispatchers.IO)
 
     private val getImagesListUseCase = GetImagesListUseCase(repository)
     private val addImageItemUseCase = AddImageItemUseCase(repository)
@@ -33,7 +35,7 @@ class MainViewModel (val imagesDatabase: ImagesDao, application: Application): V
     }
 
     private suspend fun insert(image: ImageItem){
-        imagesDatabase.insertImage(image)
+        db.imagesDao().insertImage(image)
     }
 
 }

@@ -9,6 +9,9 @@ object ImagesListRepositoryImpl: ImagesListRepository {
     private val imagesList = sortedSetOf<ImageItem>({ o1, o2 -> o1.id.compareTo(o2.id)})
     private var autoIncrementId = 0
     private val imagesListLD = MutableLiveData<List<ImageItem>>()
+    val postLive: MutableLiveData<MutableList<ImageItem>> by lazy {
+        MutableLiveData<MutableList<ImageItem>>(mutableListOf())
+    }
 
 
     override fun addImageItem(item: ImageItem) {
@@ -19,8 +22,12 @@ object ImagesListRepositoryImpl: ImagesListRepository {
         updateList()
     }
 
+    override suspend fun getImagesListFromDatabaseUseCase(): MutableList<ImageItem> {
+        return imagesList
+    }
+
     override fun getImagesList(): LiveData<List<ImageItem>> {
-        return imagesListLD
+        return postLive
     }
 
     private fun updateList(){
