@@ -21,7 +21,6 @@ class MainViewModel (repository: ImagesListRepositoryImpl): ViewModel() {
     val imagesList = getImagesListUseCase.getImagesList()
 
 
-
     suspend fun addImageItem (image: ImageItem){
         scope.launch {
             addImageItemUseCase.addImageItem(image)
@@ -29,6 +28,7 @@ class MainViewModel (repository: ImagesListRepositoryImpl): ViewModel() {
         }
 
     }
+
 
 
 }

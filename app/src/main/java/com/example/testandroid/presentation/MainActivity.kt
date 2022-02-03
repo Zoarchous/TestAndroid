@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         setupViewModel()
         viewModel.imagesList.observe(this) {
             recyclerViewAdapter.submitList(it)
+            Log.d("!!!!", it.toString())
         }
         val addButton = findViewById<ImageButton>(R.id.add_image_button)
 

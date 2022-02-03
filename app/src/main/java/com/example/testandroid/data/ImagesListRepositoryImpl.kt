@@ -10,7 +10,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ImagesListRepositoryImpl @Inject constructor(val localDataSource: LocalDataSource) : ImagesListRepository {
+class ImagesListRepositoryImpl @Inject constructor(val localDataSource: LocalDataSource) :
+    ImagesListRepository {
     private val imagesList = sortedSetOf<ImageItem>({ o1, o2 -> o1.id.compareTo(o2.id) })
     private var autoIncrementId = 0
     private val imagesListLD = MutableLiveData<List<ImageItem>>()
@@ -21,11 +22,14 @@ class ImagesListRepositoryImpl @Inject constructor(val localDataSource: LocalDat
         if (item.id == ImageItem.UNDEFINED_ID) {
             item.id = autoIncrementId++
         }
-        imagesList.add(item)
         scope.launch {
+            imagesList.add(item)
+
             insertImage(item)
+
+            updateList()
         }
-        updateList()
+
     }
 
     override suspend fun insertImage(image: ImageItem) {
