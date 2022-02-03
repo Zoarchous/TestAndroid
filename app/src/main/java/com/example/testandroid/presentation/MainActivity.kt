@@ -15,24 +15,28 @@ import com.example.testandroid.data.localModel.AppDataBase
 import com.example.testandroid.data.localModel.ImagesDao
 import com.example.testandroid.domain.ImageItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.URI
+import javax.inject.Inject
 
 const val REQUEST_CODE = 100
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var recyclerViewAdapter: RecyclerViewAdapter
+    @Inject lateinit var factory: MainViewModelFactory
     private var imageUri: Uri? = null
     val scope = CoroutineScope(Dispatchers.IO)
-    private lateinit var dataSource: ImagesDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupRecyclerView()
         setupViewModel()
-        viewModel.imagesList.observe(this){
+        viewModel.imagesList.observe(this) {
             recyclerViewAdapter.submitList(it)
         }
         val addButton = findViewById<ImageButton>(R.id.add_image_button)
@@ -46,9 +50,10 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     private fun setupRecyclerView() {
         val rvImageList = findViewById<RecyclerView>(R.id.images_recycler_view)
-        with(rvImageList){
+        with(rvImageList) {
             recyclerViewAdapter = RecyclerViewAdapter()
             adapter = recyclerViewAdapter
         }
@@ -65,10 +70,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupViewModel(){
-        val application = requireNotNull(this).application
-        dataSource = AppDataBase.getInstance(this).imagesDao()
-        val viewModelFactory = MainViewModelFactory(dataSource, application)
-        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
     }
 }

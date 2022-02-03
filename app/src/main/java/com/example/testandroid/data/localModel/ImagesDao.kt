@@ -8,7 +8,7 @@ import kotlinx.coroutines.selects.select
 @Dao
 interface ImagesDao {
     @Query ("SELECT * FROM images" )
-    suspend fun getAllImages(): MutableList<ImageItem>
+    fun getAllImages(): LiveData<List<ImageItem>>
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     @Transaction
