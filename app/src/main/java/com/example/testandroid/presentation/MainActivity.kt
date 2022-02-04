@@ -8,6 +8,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testandroid.R
@@ -20,9 +21,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.URI
+import java.util.jar.Manifest
 import javax.inject.Inject
 
 const val REQUEST_CODE = 100
+const val REQUEST_PERMISSION_CODE = 33
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -31,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     @Inject lateinit var factory: MainViewModelFactory
     private var imageUri: Uri? = null
     val scope = CoroutineScope(Dispatchers.IO)
+    private val permission = android.Manifest.permission.READ_EXTERNAL_STORAGE
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -73,6 +77,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
+        ActivityCompat.requestPermissions(this, arrayOf(permission), REQUEST_PERMISSION_CODE)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
     }
 }

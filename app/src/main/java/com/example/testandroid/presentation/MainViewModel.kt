@@ -9,25 +9,23 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel (repository: ImagesListRepositoryImpl): ViewModel() {
+class MainViewModel(repository: ImagesListRepositoryImpl) : ViewModel() {
 
     val scope = CoroutineScope(Dispatchers.IO)
 
     private val getImagesListUseCase = GetImagesListUseCase(repository)
-//    private val addImageItemUseCase = AddImageItemUseCase(repository)
+
     private val insertImageUseCase = InsertImageUseCase(repository)
 
     val imagesList = getImagesListUseCase.getImagesList()
 
 
-    suspend fun addImageItem (image: ImageItem){
+    suspend fun addImageItem(image: ImageItem) {
         scope.launch {
-//            addImageItemUseCase.addImageItem(image)
             insertImageUseCase.insertImage(image)
         }
 
     }
-
 
 
 }

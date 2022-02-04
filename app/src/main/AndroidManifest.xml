@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestAndroid"
-        android:requestLegacyExternalStorage="true">
+        android:requestLegacyExternalStorage="true"
+        >
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true">

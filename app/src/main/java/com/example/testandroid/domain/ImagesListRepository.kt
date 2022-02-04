@@ -8,7 +8,5 @@ interface ImagesListRepository{
 
     fun getImagesList ():LiveData<List<ImageItem>>
 
-//    fun addImageItem(item: ImageItem)
-
     suspend fun insertImage(image: ImageItem)
 }
