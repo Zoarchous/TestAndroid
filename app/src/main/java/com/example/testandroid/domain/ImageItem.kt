@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 @Entity (tableName = "images")
 data class ImageItem(
     var photo: String,
-    @PrimaryKey var id: Int = UNDEFINED_ID,
+    @PrimaryKey (autoGenerate = true) var id: Int = 0
 ){
-    companion object {
-        const val UNDEFINED_ID = -1
-    }
+//    companion object {
+//        const val UNDEFINED_ID = -1
+//    }
 }

@@ -10,7 +10,7 @@ interface ImagesDao {
     @Query ("SELECT * FROM images" )
     fun getAllImages(): LiveData<List<ImageItem>>
 
-    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    @Insert (onConflict = OnConflictStrategy.IGNORE)
     @Transaction
     suspend fun insertImage (image: ImageItem)
 

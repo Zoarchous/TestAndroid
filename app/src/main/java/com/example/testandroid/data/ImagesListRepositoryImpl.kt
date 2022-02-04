@@ -12,35 +12,32 @@ import javax.inject.Inject
 
 class ImagesListRepositoryImpl @Inject constructor(val localDataSource: LocalDataSource) :
     ImagesListRepository {
-    private val imagesList = sortedSetOf<ImageItem>({ o1, o2 -> o1.id.compareTo(o2.id) })
+//    private val imagesList = sortedSetOf<ImageItem>({ o1, o2 -> o1.id.compareTo(o2.id) })
     private var autoIncrementId = 0
-    private val imagesListLD = MutableLiveData<List<ImageItem>>()
+    private var imagesListLD = MutableLiveData<List<ImageItem>>()
     val scope = CoroutineScope(Dispatchers.IO)
 
 
     override fun addImageItem(item: ImageItem) {
-        if (item.id == ImageItem.UNDEFINED_ID) {
-            item.id = autoIncrementId++
-        }
         scope.launch {
-            imagesList.add(item)
-
+//            imagesList.add(item)
             insertImage(item)
-
-            updateList()
+//            updateList()
         }
 
     }
 
     override suspend fun insertImage(image: ImageItem) {
+
         localDataSource.insertImage(image)
     }
 
     override fun getImagesList(): LiveData<List<ImageItem>> {
-        return imagesListLD
+
+        return localDataSource.getAllImages()
     }
 
-    private fun updateList() {
-        imagesListLD.postValue(imagesList.toList())
-    }
+//    private fun updateList() {
+//        imagesListLD.postValue(imagesList.toList())
+//    }
 }
