@@ -18,17 +18,9 @@ class ImagesListRepositoryImpl @Inject constructor(val localDataSource: LocalDat
     val scope = CoroutineScope(Dispatchers.IO)
 
 
-    override fun addImageItem(item: ImageItem) {
-        scope.launch {
-//            imagesList.add(item)
-            insertImage(item)
-//            updateList()
-        }
 
-    }
 
     override suspend fun insertImage(image: ImageItem) {
-
         localDataSource.insertImage(image)
     }
 
