@@ -9,4 +9,10 @@ interface ImagesListRepository{
     fun getImagesList ():LiveData<List<ImageItem>>
 
     suspend fun insertImage(image: ImageItem)
+
+    suspend fun getNames(): ActivityItem
+
+    suspend fun insertNames(activityItem: ActivityItem)
+
+    suspend fun delete(activityItem: ActivityItem)
 }

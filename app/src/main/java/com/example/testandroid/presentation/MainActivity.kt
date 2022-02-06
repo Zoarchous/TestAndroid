@@ -16,6 +16,7 @@ import com.example.testandroid.R
 import com.example.testandroid.data.localModel.AppDataBase
 import com.example.testandroid.data.localModel.ImagesDao
 import com.example.testandroid.databinding.ActivityMainBinding
+import com.example.testandroid.domain.ActivityItem
 import com.example.testandroid.domain.ImageItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("!!List", it.toString())
         }
         binding.addImageButton.setOnClickListener {
+            saveEditText()
             val galleryIntent = Intent(
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.INTERNAL_CONTENT_URI
@@ -82,6 +84,22 @@ class MainActivity : AppCompatActivity() {
     private fun setupViewModel() {
         ActivityCompat.requestPermissions(this, arrayOf(permission), REQUEST_PERMISSION_CODE)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
+        scope.launch {
+            viewModel.setNames(binding.sectionNameEditText, binding.locationNameEditText)
+        }
+    }
+
+    private fun saveEditText(){
+        scope.launch {
+            val oldItem = viewModel.getNames()
+            viewModel.deleteNames(oldItem)
+        }
+        val sectionName = binding.sectionNameEditText.text.toString()
+        val locationName = binding.locationNameEditText.text.toString()
+        scope.launch {
+            val item = ActivityItem(sectionName, locationName)
+            viewModel.insertNames(item)
+        }
     }
 
 }
