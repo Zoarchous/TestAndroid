@@ -1,5 +1,6 @@
 package com.example.testandroid.presentation
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.testandroid.R
 import com.example.testandroid.data.localModel.AppDataBase
 import com.example.testandroid.data.localModel.ImagesDao
+import com.example.testandroid.databinding.ActivityMainBinding
 import com.example.testandroid.domain.ImageItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,24 +31,26 @@ const val REQUEST_PERMISSION_CODE = 33
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
     private lateinit var viewModel: MainViewModel
     private lateinit var recyclerViewAdapter: RecyclerViewAdapter
     @Inject lateinit var factory: MainViewModelFactory
     private var imageUri: Uri? = null
     val scope = CoroutineScope(Dispatchers.IO)
     private val permission = android.Manifest.permission.READ_EXTERNAL_STORAGE
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupRecyclerView()
         setupViewModel()
         viewModel.imagesList.observe(this) {
             recyclerViewAdapter.submitList(it)
             Log.d("!!List", it.toString())
         }
-        val addButton = findViewById<ImageButton>(R.id.add_image_button)
-
-        addButton.setOnClickListener {
+        binding.addImageButton.setOnClickListener {
             val galleryIntent = Intent(
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.INTERNAL_CONTENT_URI
@@ -57,8 +61,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        val rvImageList = findViewById<RecyclerView>(R.id.images_recycler_view)
-        with(rvImageList) {
+        with(binding.imagesRecyclerView) {
             recyclerViewAdapter = RecyclerViewAdapter()
             adapter = recyclerViewAdapter
         }
@@ -80,4 +83,5 @@ class MainActivity : AppCompatActivity() {
         ActivityCompat.requestPermissions(this, arrayOf(permission), REQUEST_PERMISSION_CODE)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
     }
+
 }

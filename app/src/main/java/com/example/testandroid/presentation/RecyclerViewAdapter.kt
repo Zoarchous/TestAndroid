@@ -7,6 +7,8 @@ import com.example.testandroid.R
 
 import com.example.testandroid.domain.ImageItem
 import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.CropSquareTransformation
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 
 class RecyclerViewAdapter :
 ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
@@ -27,7 +29,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
         val imageItem = getItem(position)
         Picasso.get().apply { isLoggingEnabled = true }
             .load(imageItem.photo)
-            .placeholder(R.drawable.ic_launcher_background)
+            .transform(CropSquareTransformation())
             .into(viewHolder.photo)
     }
 

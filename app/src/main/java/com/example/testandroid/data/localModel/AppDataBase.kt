@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.testandroid.domain.ActivityItem
 import com.example.testandroid.domain.ImageItem
 
-@Database(entities = [ImageItem::class], version = 1)
+@Database(entities = [ImageItem::class], version = 2)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun imagesDao(): ImagesDao
 

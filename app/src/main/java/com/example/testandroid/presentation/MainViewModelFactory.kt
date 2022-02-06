@@ -7,7 +7,7 @@ import com.example.testandroid.data.ImagesListRepositoryImpl
 import com.example.testandroid.data.localModel.ImagesDao
 import javax.inject.Inject
 
-class MainViewModelFactory @Inject constructor(val repository: ImagesListRepositoryImpl): ViewModelProvider.Factory {
+class MainViewModelFactory @Inject constructor(private val repository: ImagesListRepositoryImpl): ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
