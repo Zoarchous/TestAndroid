@@ -4,13 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.testandroid.domain.ActivityItem
+import com.example.testandroid.domain.SectionNameItem
 import com.example.testandroid.domain.ImageItem
+import com.example.testandroid.domain.LocationNameItem
 
-@Database(entities = [ImageItem::class, ActivityItem::class],  version = 4)
+@Database(entities = [ImageItem::class, SectionNameItem::class, LocationNameItem::class],  version = 1)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun imagesDao(): ImagesDao
-    abstract fun namesDao(): NamesDao
+    abstract fun sectionNameDao(): SectionNameDao
+    abstract fun locationNameDao(): LocationNameDao
+
 
     companion object {
 

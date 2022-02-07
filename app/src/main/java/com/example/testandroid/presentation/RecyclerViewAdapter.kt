@@ -8,7 +8,7 @@ import com.example.testandroid.R
 import com.example.testandroid.domain.ImageItem
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropSquareTransformation
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
+
 
 class RecyclerViewAdapter :
 ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){

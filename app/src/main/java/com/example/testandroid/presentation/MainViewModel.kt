@@ -16,19 +16,16 @@ class MainViewModel(repository: ImagesListRepositoryImpl) : ViewModel() {
 
     private val insertImageUseCase = InsertImageUseCase(repository)
 
-    private val getNamesUseCase = GetNamesUseCase(repository)
+    private val getSectionNameUseCase = GetSectionNameUseCase(repository)
 
-    private val insertNamesUseCase = InsertNamesUseCase(repository)
+    private val getLocationNameUseCase = GetLocationNameUseCase(repository)
 
-    private val deleteNamesUseCase = DeleteNamesUseCase(repository)
+    private val insertLocationNameUseCase = InsertLocationNameUseCase(repository)
+
+    private val insertSectionNameUseCase = InsertSectionNameUseCase(repository)
 
     val imagesList = getImagesListUseCase.getImagesList()
 
-    lateinit var names: ActivityItem
-
-    suspend fun getNames(): ActivityItem{
-        return getNamesUseCase.getNames().also { names = it }
-    }
 
     suspend fun addImageItem(image: ImageItem) {
         scope.launch {
@@ -36,25 +33,25 @@ class MainViewModel(repository: ImagesListRepositoryImpl) : ViewModel() {
         }
     }
 
-    suspend fun deleteNames(activityItem: ActivityItem){
-        scope.launch {
-            deleteNamesUseCase.delete(activityItem)
-        }
+    suspend fun insertSectionName(sectionName: String){
+        val name = SectionNameItem(1, sectionName)
+        insertSectionNameUseCase.insertSectionName(name)
+    }
+    suspend fun insertLocationName(locationName: String){
+        val name = LocationNameItem(1, locationName)
+        insertLocationNameUseCase.insertLocationName(name)
     }
 
-    suspend fun insertNames(activityItem: ActivityItem){
-        scope.launch {
-            insertNamesUseCase.insertNames(activityItem)
-        }
-    }
+    suspend fun setNames(view1: EditText, view2: EditText){
+        val item1 = getSectionNameUseCase.getSectionName()
+        val item2 = getLocationNameUseCase.getLocationName()
 
-    fun setNames(view1: EditText, view2: EditText){
-        scope.launch {
-            val item = getNames()
-            if (item != null){
-                view1.setText(item.sectionName)
-                view2.setText(item.locationName)
-            }
+        if (item1 != null){
+            view1.setText(item1.sectionName)
+        }
+
+        if (item2 != null){
+            view2.setText(item2.locationName)
         }
     }
 }

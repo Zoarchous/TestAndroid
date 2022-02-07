@@ -1,8 +1,6 @@
 package com.example.testandroid.domain
 
 import androidx.lifecycle.LiveData
-import com.example.testandroid.data.localModel.LocalDataSource
-import javax.inject.Inject
 
 interface ImagesListRepository{
 
@@ -10,9 +8,15 @@ interface ImagesListRepository{
 
     suspend fun insertImage(image: ImageItem)
 
-    suspend fun getNames(): ActivityItem
+    suspend fun getSectionName(): SectionNameItem
 
-    suspend fun insertNames(activityItem: ActivityItem)
+    suspend fun getLocationName(): LocationNameItem
 
-    suspend fun delete(activityItem: ActivityItem)
+    suspend fun insertLocationName(locationNameItem: LocationNameItem)
+
+    suspend fun insertSectionName(sectionNameItem: SectionNameItem)
+
+    suspend fun deleteLocationName()
+
+    suspend fun deleteSectionName()
 }

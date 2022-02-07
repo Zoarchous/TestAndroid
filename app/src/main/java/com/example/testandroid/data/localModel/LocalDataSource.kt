@@ -1,10 +1,10 @@
 package com.example.testandroid.data.localModel
 
-import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LiveData
-import com.example.testandroid.domain.ActivityItem
+import com.example.testandroid.domain.SectionNameItem
 import com.example.testandroid.domain.ImageItem
+import com.example.testandroid.domain.LocationNameItem
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -19,15 +19,27 @@ class LocalDataSource @Inject constructor(@ApplicationContext context: Context) 
         dataBase.imagesDao().insertImage(image)
     }
 
-    suspend fun getNames(): ActivityItem{
-        return dataBase.namesDao().getNames()
+    suspend fun getSectionName(): SectionNameItem{
+        return dataBase.sectionNameDao().getSectionName()
     }
 
-    suspend fun insertNames (activityItem: ActivityItem){
-        dataBase.namesDao().insertNames(activityItem)
+    suspend fun getLocationName(): LocationNameItem {
+        return dataBase.locationNameDao().getLocationName()
     }
 
-    suspend fun delete(activityItem: ActivityItem){
-        dataBase.namesDao().delete(activityItem)
+    suspend fun insertLocationName(locationNameItem: LocationNameItem){
+        dataBase.locationNameDao().insertLocationName(locationNameItem)
+    }
+
+    suspend fun insertSectionName (sectionNameItem: SectionNameItem){
+        dataBase.sectionNameDao().insertSectionName(sectionNameItem)
+    }
+
+    suspend fun deleteSectionName(){
+        dataBase.sectionNameDao().deleteSectionName()
+    }
+
+    suspend fun deleteLocationName(){
+        dataBase.locationNameDao().deleteLocationName()
     }
 }
