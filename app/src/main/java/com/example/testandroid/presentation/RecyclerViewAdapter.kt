@@ -64,11 +64,11 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
                     }
 
                     override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-                        val id = item.itemId
-                        when(id){
+
+                        when(item.itemId){
                             R.id.menu_delete -> {
                                 for (s in selectList){
-                                    currentList.remove(s)
+                                    viewModel?.deleteSelected(s)
                                 }
                                 mode.finish()
                             }

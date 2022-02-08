@@ -28,6 +28,8 @@ class MainViewModel(repository: ImagesListRepositoryImpl) : ViewModel() {
 
     private val insertSectionNameUseCase = InsertSectionNameUseCase(repository)
 
+    private val clearSelectedImagesUseCase = ClearSelectedImagesUseCase(repository)
+
     val imagesList = getImagesListUseCase.getImagesList()
 
     var mutableLiveData = MutableLiveData<String>()
@@ -41,6 +43,13 @@ class MainViewModel(repository: ImagesListRepositoryImpl) : ViewModel() {
     // create get text method
     fun getText(): MutableLiveData<String>? {
         return mutableLiveData
+    }
+
+
+    fun deleteSelected(item: ImageItem){
+        scope.launch {
+            clearSelectedImagesUseCase.clearSelectedImages(item)
+        }
     }
 
     suspend fun addImageItem(image: ImageItem) {

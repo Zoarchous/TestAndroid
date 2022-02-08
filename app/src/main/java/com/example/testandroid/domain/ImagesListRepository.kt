@@ -19,4 +19,6 @@ interface ImagesListRepository{
     suspend fun deleteLocationName()
 
     suspend fun deleteSectionName()
+
+    suspend fun clearImagesDatabase(item: ImageItem)
 }

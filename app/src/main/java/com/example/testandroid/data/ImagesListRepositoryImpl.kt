@@ -39,6 +39,10 @@ class ImagesListRepositoryImpl @Inject constructor(private val localDataSource: 
         localDataSource.deleteSectionName()
     }
 
+    override suspend fun clearImagesDatabase(item: ImageItem) {
+        localDataSource.clearImagesDatabase(item)
+    }
+
     override fun getImagesList(): LiveData<List<ImageItem>> {
         return localDataSource.getAllImages()
     }

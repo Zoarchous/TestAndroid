@@ -42,4 +42,8 @@ class LocalDataSource @Inject constructor(@ApplicationContext context: Context) 
     suspend fun deleteLocationName(){
         dataBase.locationNameDao().deleteLocationName()
     }
+
+    suspend fun clearImagesDatabase(item: ImageItem){
+        dataBase.imagesDao().clearImagesDatabase(item)
+    }
 }
