@@ -2,6 +2,7 @@ package com.example.testandroid.data.localModel
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.testandroid.domain.SectionNameItem
 import com.example.testandroid.domain.ImageItem
 import com.example.testandroid.domain.LocationNameItem
@@ -11,7 +12,7 @@ import javax.inject.Inject
 class LocalDataSource @Inject constructor(@ApplicationContext context: Context) {
     private val dataBase = AppDataBase.getInstance(context)
 
-    fun getAllImages(): LiveData<List<ImageItem>>{
+    fun getAllImages(): LiveData<MutableList<ImageItem>> {
         return dataBase.imagesDao().getAllImages()
     }
 

@@ -1,10 +1,12 @@
 package com.example.testandroid.presentation
 
 import android.app.Activity
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ListAdapter
 import com.example.testandroid.R
@@ -64,11 +66,9 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
                     }
 
                     override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-
                         when(item.itemId){
                             R.id.menu_delete -> {
                                 for (s in selectList){
-                                    viewModel?.deleteSelected(s)
                                 }
                                 mode.finish()
                             }

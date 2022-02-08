@@ -86,4 +86,5 @@ class MainActivity : AppCompatActivity() {
             viewModel.insertLocationName(locationName)
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.testandroid.presentation
 
+import android.util.Log
 import android.widget.EditText
 import androidx.lifecycle.ViewModel
 import com.example.testandroid.data.ImagesListRepositoryImpl

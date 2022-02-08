@@ -7,7 +7,7 @@ import com.example.testandroid.domain.ImageItem
 @Dao
 interface ImagesDao {
     @Query ("SELECT * FROM images" )
-    fun getAllImages(): LiveData<List<ImageItem>>
+    fun getAllImages(): LiveData<MutableList<ImageItem>>
 
     @Insert (onConflict = OnConflictStrategy.IGNORE)
     @Transaction

@@ -1,6 +1,7 @@
 package com.example.testandroid.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.testandroid.data.localModel.LocalDataSource
 import com.example.testandroid.domain.SectionNameItem
 import com.example.testandroid.domain.ImageItem
@@ -43,7 +44,7 @@ class ImagesListRepositoryImpl @Inject constructor(private val localDataSource: 
         localDataSource.clearImagesDatabase(item)
     }
 
-    override fun getImagesList(): LiveData<List<ImageItem>> {
+    override fun getImagesList(): LiveData<MutableList<ImageItem>> {
         return localDataSource.getAllImages()
     }
 

@@ -1,10 +1,11 @@
 package com.example.testandroid.domain
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 interface ImagesListRepository{
 
-    fun getImagesList ():LiveData<List<ImageItem>>
+    fun getImagesList (): LiveData<MutableList<ImageItem>>
 
     suspend fun insertImage(image: ImageItem)
 
