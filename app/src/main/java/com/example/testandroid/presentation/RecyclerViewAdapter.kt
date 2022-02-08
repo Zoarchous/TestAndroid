@@ -5,9 +5,8 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.ListAdapter
 import com.example.testandroid.R
 
@@ -15,6 +14,7 @@ import com.example.testandroid.domain.ImageItem
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropSquareTransformation
 import java.util.ArrayList
+import javax.inject.Inject
 
 
 class RecyclerViewAdapter (var activity: Activity) :
@@ -25,6 +25,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
     var isSelectAll = false
     var selectList = ArrayList<ImageItem>()
 
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -34,6 +35,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
             parent,
             false
         )
+        viewModel = ViewModelProvider(activity as MainActivity)[MainViewModel::class.java]
         return ImageItemViewHolder(view)
     }
 
@@ -69,6 +71,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
                         when(item.itemId){
                             R.id.menu_delete -> {
                                 for (s in selectList){
+                                    viewModel?.deleteSelected(s)
                                 }
                                 mode.finish()
                             }
