@@ -7,6 +7,10 @@ import com.example.testandroid.domain.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import androidx.lifecycle.MutableLiveData
+
+
+
 
 class MainViewModel(repository: ImagesListRepositoryImpl) : ViewModel() {
 
@@ -26,6 +30,18 @@ class MainViewModel(repository: ImagesListRepositoryImpl) : ViewModel() {
 
     val imagesList = getImagesListUseCase.getImagesList()
 
+    var mutableLiveData = MutableLiveData<String>()
+
+    // create set text method
+    fun setText(s: String) {
+        // set value
+        mutableLiveData.value = s
+    }
+
+    // create get text method
+    fun getText(): MutableLiveData<String>? {
+        return mutableLiveData
+    }
 
     suspend fun addImageItem(image: ImageItem) {
         scope.launch {
