@@ -2,4 +2,6 @@
     <string name="app_name">TestAndroid</string>
     <string name="locations_text_view">ЛОКАЦИИ</string>
     <string name="section_name_hint">Название</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

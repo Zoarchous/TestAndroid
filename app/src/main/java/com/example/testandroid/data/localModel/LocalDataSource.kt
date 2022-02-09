@@ -2,10 +2,9 @@ package com.example.testandroid.data.localModel
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.testandroid.domain.SectionNameItem
-import com.example.testandroid.domain.ImageItem
-import com.example.testandroid.domain.LocationNameItem
+import com.example.testandroid.domain.names.SectionNameItem
+import com.example.testandroid.domain.image.ImageItem
+import com.example.testandroid.domain.names.LocationNameItem
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -20,7 +19,7 @@ class LocalDataSource @Inject constructor(@ApplicationContext context: Context) 
         dataBase.imagesDao().insertImage(image)
     }
 
-    suspend fun getSectionName(): SectionNameItem{
+    suspend fun getSectionName(): SectionNameItem {
         return dataBase.sectionNameDao().getSectionName()
     }
 

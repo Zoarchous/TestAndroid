@@ -1,20 +1,19 @@
 package com.example.testandroid.presentation
 
 import android.app.Activity
-import android.util.Log
+import android.content.Intent
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.ListAdapter
 import com.example.testandroid.R
 
-import com.example.testandroid.domain.ImageItem
+import com.example.testandroid.domain.image.ImageItem
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropSquareTransformation
+import kotlinx.coroutines.withContext
 import java.util.ArrayList
-import javax.inject.Inject
 
 
 class RecyclerViewAdapter (var activity: Activity) :
@@ -24,6 +23,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
     var isEnable = false
     var isSelectAll = false
     var selectList = ArrayList<ImageItem>()
+    var onClickListener: ((ImageItem) -> Unit)? = null
 
 
     override fun onCreateViewHolder(
@@ -109,8 +109,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
             if (isEnable){
                 clickItem(viewHolder)
             }else{
-                Toast.makeText(activity, "You clicked" + getItem(position), Toast.LENGTH_SHORT)
-                    .show()
+               onClickListener?.invoke(getItem(position))
             }
         }
         if (isSelectAll){

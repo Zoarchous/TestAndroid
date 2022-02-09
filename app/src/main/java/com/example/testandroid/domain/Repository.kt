@@ -1,9 +1,11 @@
 package com.example.testandroid.domain
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.example.testandroid.domain.image.ImageItem
+import com.example.testandroid.domain.names.LocationNameItem
+import com.example.testandroid.domain.names.SectionNameItem
 
-interface ImagesListRepository{
+interface Repository{
 
     fun getImagesList (): LiveData<MutableList<ImageItem>>
 

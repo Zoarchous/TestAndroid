@@ -1,4 +1,4 @@
-package com.example.testandroid.domain
+package com.example.testandroid.domain.names
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

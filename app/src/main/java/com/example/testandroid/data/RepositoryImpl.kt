@@ -1,16 +1,15 @@
 package com.example.testandroid.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.testandroid.data.localModel.LocalDataSource
-import com.example.testandroid.domain.SectionNameItem
-import com.example.testandroid.domain.ImageItem
-import com.example.testandroid.domain.ImagesListRepository
-import com.example.testandroid.domain.LocationNameItem
+import com.example.testandroid.domain.names.SectionNameItem
+import com.example.testandroid.domain.image.ImageItem
+import com.example.testandroid.domain.Repository
+import com.example.testandroid.domain.names.LocationNameItem
 import javax.inject.Inject
 
-class ImagesListRepositoryImpl @Inject constructor(private val localDataSource: LocalDataSource) :
-    ImagesListRepository {
+class RepositoryImpl @Inject constructor(private val localDataSource: LocalDataSource) :
+    Repository {
 
     override suspend fun insertImage(image: ImageItem) {
         localDataSource.insertImage(image)

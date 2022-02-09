@@ -1,19 +1,20 @@
 package com.example.testandroid.presentation
 
-import android.util.Log
 import android.widget.EditText
 import androidx.lifecycle.ViewModel
-import com.example.testandroid.data.ImagesListRepositoryImpl
-import com.example.testandroid.domain.*
+import com.example.testandroid.data.RepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import androidx.lifecycle.MutableLiveData
+import com.example.testandroid.domain.image.ClearSelectedImagesUseCase
+import com.example.testandroid.domain.image.GetImagesListUseCase
+import com.example.testandroid.domain.image.ImageItem
+import com.example.testandroid.domain.image.InsertImageUseCase
+import com.example.testandroid.domain.names.*
 
 
-
-
-class MainViewModel(repository: ImagesListRepositoryImpl) : ViewModel() {
+class MainViewModel(repository: RepositoryImpl) : ViewModel() {
 
     val scope = CoroutineScope(Dispatchers.IO)
 

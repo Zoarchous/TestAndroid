@@ -1,7 +1,7 @@
 package com.example.testandroid.data.localModel
 
 import androidx.room.*
-import com.example.testandroid.domain.SectionNameItem
+import com.example.testandroid.domain.names.SectionNameItem
 
 @Dao
 interface SectionNameDao {

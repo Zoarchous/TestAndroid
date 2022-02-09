@@ -1,7 +1,7 @@
 package com.example.testandroid.presentation
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.testandroid.domain.ImageItem
+import com.example.testandroid.domain.image.ImageItem
 
 class ImageItemDiffCallback: DiffUtil.ItemCallback<ImageItem>() {
     override fun areItemsTheSame(oldItem: ImageItem, newItem: ImageItem): Boolean {

@@ -2,7 +2,7 @@ package com.example.testandroid.data.localModel
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.testandroid.domain.ImageItem
+import com.example.testandroid.domain.image.ImageItem
 
 @Dao
 interface ImagesDao {

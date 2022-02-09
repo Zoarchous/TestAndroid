@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.testandroid.domain.SectionNameItem
-import com.example.testandroid.domain.ImageItem
-import com.example.testandroid.domain.LocationNameItem
+import com.example.testandroid.domain.names.SectionNameItem
+import com.example.testandroid.domain.image.ImageItem
+import com.example.testandroid.domain.names.LocationNameItem
 
 @Database(entities = [ImageItem::class, SectionNameItem::class, LocationNameItem::class],  version = 1)
 abstract class AppDataBase : RoomDatabase() {

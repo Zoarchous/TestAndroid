@@ -1,10 +1,8 @@
-package com.example.testandroid.domain
+package com.example.testandroid.domain.names
 
-import android.text.Editable
-import androidx.lifecycle.LiveData
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.testandroid.domain.ImageItem
+
 @Entity (tableName = "section_name")
 data class SectionNameItem(
     @PrimaryKey val id: Int = 1,

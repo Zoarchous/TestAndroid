@@ -1,16 +1,17 @@
 package com.example.testandroid.presentation
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
+import com.example.testandroid.R
 import com.example.testandroid.databinding.ActivityMainBinding
-import com.example.testandroid.domain.ImageItem
+import com.example.testandroid.domain.image.ImageItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             recyclerViewAdapter.submitList(it)
             Log.d("!!List", it.toString())
         }
+
         binding.addImageButton.setOnClickListener {
             saveNames()
             val galleryIntent = Intent(
@@ -56,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             recyclerViewAdapter = RecyclerViewAdapter(this@MainActivity)
             adapter = recyclerViewAdapter
         }
+        setupClickListener()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -86,4 +89,21 @@ class MainActivity : AppCompatActivity() {
             viewModel.insertLocationName(locationName)
         }
     }
+    private fun setupClickListener() {
+        recyclerViewAdapter.onClickListener = {
+            supportFragmentManager.beginTransaction().run {
+                val fragment = ImageFragment.setPhoto(it.photo)
+                binding.mainLayout.visibility = View.GONE
+                replace(R.id.container, fragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        binding.mainLayout.visibility = View.VISIBLE
+    }
+
 }
