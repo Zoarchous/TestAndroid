@@ -46,6 +46,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
             .transform(CropSquareTransformation())
             .into(viewHolder.photo)
 
+
         viewHolder.view.setOnLongClickListener{ v ->
             if (!isEnable){
                 val callback: ActionMode.Callback =
@@ -62,7 +63,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
                         viewModel?.getText()?.observe(
                             activity as LifecycleOwner,
                             Observer { s ->
-                                mode.title = String.format("%s Selected", s)
+                                mode.title = String.format("$s Selected", s)
                             })
                         return true
                     }
@@ -85,7 +86,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
                                     selectList.addAll(currentList)
                                 }
                                 viewModel?.setText(selectList.size.toString())
-                                notifyDataSetChanged()
+                                submitList(currentList)
                             }
                         }
                         return true
@@ -95,7 +96,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
                         isEnable = false
                         isSelectAll = false
                         selectList.clear()
-                        notifyDataSetChanged()
+                        submitList(currentList)
                     }
                 }
                 (v.context as AppCompatActivity).startActionMode(callback)
