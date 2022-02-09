@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.INTERNAL_CONTENT_URI
             )
+
             startActivityForResult(galleryIntent, REQUEST_CODE)
         }
     }
