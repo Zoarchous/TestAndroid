@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
     val scope = CoroutineScope(Dispatchers.IO)
     private val permission = android.Manifest.permission.READ_EXTERNAL_STORAGE
     private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
