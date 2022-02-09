@@ -24,7 +24,7 @@
         android:layout_gravity="end"
         android:layout_marginTop="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin"
-        android:src="@drawable/ic_baseline_check_circle_24"
+        android:src="@drawable/ic_checked"
         android:visibility="gone"
         />
 
