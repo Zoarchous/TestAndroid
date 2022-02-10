@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         setupViewModel()
         viewModel.imagesList.observe(this) {
             recyclerViewAdapter.submitList(it)
-            Log.d("!!List", it.toString())
         }
 
         binding.addImageButton.setOnClickListener {
@@ -68,7 +67,6 @@ class MainActivity : AppCompatActivity() {
             val image = ImageItem(imageUri.toString())
             scope.launch {
                 viewModel.addImageItem(image)
-                Log.d("!!Image", image.toString())
             }
         }
     }

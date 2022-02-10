@@ -1,9 +1,12 @@
-package com.example.testandroid.data.localModel
+package com.example.testandroid.data.localModel.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.testandroid.data.localModel.dao.ImagesDao
+import com.example.testandroid.data.localModel.dao.LocationNameDao
+import com.example.testandroid.data.localModel.dao.SectionNameDao
 import com.example.testandroid.domain.names.SectionNameItem
 import com.example.testandroid.domain.image.ImageItem
 import com.example.testandroid.domain.names.LocationNameItem

@@ -1,4 +1,4 @@
-package com.example.testandroid.data.localModel
+package com.example.testandroid.data.localModel.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

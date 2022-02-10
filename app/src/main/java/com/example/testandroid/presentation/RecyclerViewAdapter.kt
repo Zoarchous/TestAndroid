@@ -56,7 +56,6 @@ class RecyclerViewAdapter(var activity: Activity) :
 
                         override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
                             isEnable = true
-                            clickItem(viewHolder)
                             notifyDataSetChanged()
                             return true
                         }
