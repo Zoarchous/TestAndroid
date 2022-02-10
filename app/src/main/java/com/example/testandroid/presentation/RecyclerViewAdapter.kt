@@ -23,6 +23,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
     var isEnable = false
     var isSelectAll = false
     var selectList = ArrayList<ImageItem>()
+    var listForSelection = ArrayList<ImageItem>()
     var onClickListener: ((ImageItem) -> Unit)? = null
 
 
@@ -54,6 +55,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
                     override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
                         val menuInflater = mode.menuInflater
                         menuInflater.inflate(R.menu.menu, menu)
+
                         return true
                     }
 
@@ -84,6 +86,7 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
                                     isSelectAll = true
                                     selectList.clear()
                                     selectList.addAll(currentList)
+
                                 }
                                 viewModel?.setText(selectList.size.toString())
                                 submitList(currentList)
@@ -93,6 +96,8 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
                     }
 
                     override fun onDestroyActionMode(p0: ActionMode?) {
+                        viewHolder.checkbox.visibility = View.GONE
+                        viewHolder.pickCheckbox.visibility = View.GONE
                         isEnable = false
                         isSelectAll = false
                         selectList.clear()
@@ -113,19 +118,19 @@ ListAdapter<ImageItem, ImageItemViewHolder>(ImageItemDiffCallback()){
             }
         }
         if (isSelectAll){
-            viewHolder.checkbox.visibility = View.VISIBLE
+            viewHolder.pickCheckbox.visibility = View.VISIBLE
         } else {
-            viewHolder.checkbox.visibility = View.GONE
+            viewHolder.pickCheckbox.visibility = View.GONE
         }
     }
 
     private fun clickItem(viewHolder: ImageItemViewHolder){
         val s = getItem(viewHolder.adapterPosition)
-        if (viewHolder.checkbox.visibility == View.GONE){
-            viewHolder.checkbox.visibility = View.VISIBLE
+        if (viewHolder.pickCheckbox.visibility == View.GONE){
+            viewHolder.pickCheckbox.visibility = View.VISIBLE
             selectList.add(s)
         }else{
-            viewHolder.checkbox.visibility = View.GONE
+            viewHolder.pickCheckbox.visibility = View.GONE
             selectList.remove(s)
         }
     }

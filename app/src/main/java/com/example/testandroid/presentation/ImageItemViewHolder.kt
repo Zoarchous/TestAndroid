@@ -8,4 +8,5 @@ import com.example.testandroid.R
 class ImageItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     val photo: ImageView = view.findViewById(R.id.image_item)
     var checkbox: ImageView = view.findViewById(R.id.checkbox)
+    var pickCheckbox: ImageView = view.findViewById(R.id.pick)
 }
