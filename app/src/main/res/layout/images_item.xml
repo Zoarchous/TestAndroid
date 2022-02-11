@@ -25,7 +25,7 @@
         android:layout_gravity="end"
         android:layout_marginTop="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin"
-        android:src="@drawable/ic_unchecked"
+        android:src="@drawable/ic_circle"
         android:visibility="visible"
         />
     <ImageView
