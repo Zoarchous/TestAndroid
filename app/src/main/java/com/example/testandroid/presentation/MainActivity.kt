@@ -53,9 +53,9 @@ class MainActivity : AppCompatActivity() {
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.INTERNAL_CONTENT_URI
             )
-
             startActivityForResult(galleryIntent, REQUEST_CODE)
         }
+
     }
 
     private fun setupRecyclerView() {
@@ -95,44 +95,34 @@ class MainActivity : AppCompatActivity() {
     }
     private fun setupClickListener() {
 
-        recyclerViewAdapter.onClickListener ={
-            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-            val dialog: AlertDialog = builder.create()
-            val inflater: LayoutInflater = layoutInflater
-            val dialogLayout: View = inflater.inflate(R.layout.fragment_image, null)
-            dialog.requestWindowFeature(Window.FEATURE_CONTEXT_MENU)
-            val imageView: ImageView? = dialogLayout.findViewById(R.id.fullscreenImage)
-            dialog.setView(dialogLayout)
-            dialog.setCanceledOnTouchOutside(true)
-            Picasso.get()
-                .load(it.photo)
-                .into(imageView)
-            dialog.show()
-        }
-
-
-//        recyclerViewAdapter.onClickListener = {
-//            supportFragmentManager.beginTransaction().run {
-//                val fragment = ImageFragment.setPhoto(it.photo)
-//                binding.mainLayout.visibility = View.GONE
-//                replace(R.id.container, fragment)
-//                addToBackStack(null)
-//                commit()
-//            }
+//        recyclerViewAdapter.onClickListener ={
+//            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+//            val dialog: AlertDialog = builder.create()
+//            val inflater: LayoutInflater = layoutInflater
+//            val dialogLayout: View = inflater.inflate(R.layout.fragment_image, null)
+//            dialog.requestWindowFeature(Window.FEATURE_CONTEXT_MENU)
+//            val imageView: ImageView? = dialogLayout.findViewById(R.id.fullscreenImage)
+//            dialog.setView(dialogLayout)
+//            dialog.setCanceledOnTouchOutside(true)
+//            Picasso.get()
+//                .load(it.photo)
+//                .into(imageView)
+//            dialog.show()
 //        }
-//        val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
-//        val dialog: AlertDialog = builder.create()
-//        val inflater: LayoutInflater = LayoutInflater.from(activity)
-//        val dialogLayout: View = inflater.inflate(R.layout.fragment_image, null)
-//        val imageView: ImageView? = dialog.findViewById(R.id.fullscreenImage)
-//        dialog.requestWindowFeature(Window.FEATURE_ACTION_BAR)
-//        dialog.setView(dialogLayout)
-//        dialog.setCanceledOnTouchOutside(true)
-//        Picasso.get()
-//            .load(getItem(position).photo)
-//            .into(imageView)
-//        dialog.show()
+
+
+        recyclerViewAdapter.onClickListener = {
+            supportFragmentManager.beginTransaction().run {
+                val fragment = ImageFragment.setPhoto(it.photo)
+                binding.mainLayout.visibility = View.GONE
+                replace(R.id.container, fragment)
+                addToBackStack(null)
+                commit()
+            }
+        }
     }
+
+
 
     override fun onBackPressed() {
         super.onBackPressed()

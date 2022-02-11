@@ -16,7 +16,7 @@ class ImageFragment : DialogFragment() {
 
     private lateinit var binding: FragmentImageBinding
     private val photo: String by lazy { requireArguments().getString(PHOTO, "") }
-    private var toolbar: Toolbar? = null
+    private var toolbar: androidx.appcompat.widget.Toolbar? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,12 +39,23 @@ class ImageFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        binding = FragmentImageBinding.inflate(inflater)
+        toolbar = binding.toolbar
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Picasso.get()
+            .load(photo)
+            .into(binding.fullscreenImage)
+        toolbar!!.setNavigationOnClickListener { v: View? -> dismiss()
+        activity?.onBackPressed()
+        }
+    }
 
     companion object{
+        const val TAG = "dialog"
         fun setPhoto(photo: String) = ImageFragment().apply {
             arguments = Bundle().apply {
                 putString(PHOTO, photo)
