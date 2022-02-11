@@ -29,7 +29,7 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -37,10 +37,16 @@
 
             <ImageView
                 android:id="@+id/fullscreenImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:transitionName="imageTag" />
+            <ProgressBar
+                android:id="@+id/progressBar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:transitionName="imageTag" />
+                android:layout_gravity="center"
+                />
 
-        </RelativeLayout>
+        </FrameLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -1,15 +1,19 @@
 package com.example.testandroid.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import android.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import com.example.testandroid.R
 import com.example.testandroid.databinding.FragmentImageBinding
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 private const val PHOTO = "photo"
 class ImageFragment : DialogFragment() {
@@ -46,13 +50,25 @@ class ImageFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         Picasso.get()
             .load(photo)
-            .into(binding.fullscreenImage)
+            .into(binding.fullscreenImage, object: Callback {
+                override fun onSuccess() {
+                    binding.progressBar.visibility = View.GONE
+                }
+
+                override fun onError(e: Exception?) {
+                    Log.d("!!!", "$e")
+                }
+
+            })
         toolbar!!.setNavigationOnClickListener { v: View? -> dismiss()
         activity?.onBackPressed()
         }
     }
+
+
 
     companion object{
         const val TAG = "dialog"
@@ -62,5 +78,6 @@ class ImageFragment : DialogFragment() {
             }
         }
     }
+
 
 }
