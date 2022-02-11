@@ -5,13 +5,19 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.testandroid.R
 import com.example.testandroid.databinding.ActivityMainBinding
 import com.example.testandroid.domain.image.ImageItem
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -88,20 +94,51 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun setupClickListener() {
-        recyclerViewAdapter.onClickListener = {
-            supportFragmentManager.beginTransaction().run {
-                val fragment = ImageFragment.setPhoto(it.photo)
-                binding.mainLayout.visibility = View.GONE
-                replace(R.id.container, fragment)
-                addToBackStack(null)
-                commit()
-            }
+
+        recyclerViewAdapter.onClickListener ={
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            val dialog: AlertDialog = builder.create()
+            val inflater: LayoutInflater = layoutInflater
+            val dialogLayout: View = inflater.inflate(R.layout.fragment_image, null)
+            dialog.requestWindowFeature(Window.FEATURE_CONTEXT_MENU)
+            val imageView: ImageView? = dialogLayout.findViewById(R.id.fullscreenImage)
+            dialog.setView(dialogLayout)
+            dialog.setCanceledOnTouchOutside(true)
+            Picasso.get()
+                .load(it.photo)
+                .into(imageView)
+            dialog.show()
         }
+
+
+//        recyclerViewAdapter.onClickListener = {
+//            supportFragmentManager.beginTransaction().run {
+//                val fragment = ImageFragment.setPhoto(it.photo)
+//                binding.mainLayout.visibility = View.GONE
+//                replace(R.id.container, fragment)
+//                addToBackStack(null)
+//                commit()
+//            }
+//        }
+//        val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
+//        val dialog: AlertDialog = builder.create()
+//        val inflater: LayoutInflater = LayoutInflater.from(activity)
+//        val dialogLayout: View = inflater.inflate(R.layout.fragment_image, null)
+//        val imageView: ImageView? = dialog.findViewById(R.id.fullscreenImage)
+//        dialog.requestWindowFeature(Window.FEATURE_ACTION_BAR)
+//        dialog.setView(dialogLayout)
+//        dialog.setCanceledOnTouchOutside(true)
+//        Picasso.get()
+//            .load(getItem(position).photo)
+//            .into(imageView)
+//        dialog.show()
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         binding.mainLayout.visibility = View.VISIBLE
     }
+
+
 
 }

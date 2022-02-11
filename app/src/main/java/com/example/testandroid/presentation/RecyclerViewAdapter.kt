@@ -2,6 +2,8 @@ package com.example.testandroid.presentation
 
 import android.app.Activity
 import android.view.*
+import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ListAdapter

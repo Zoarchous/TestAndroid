@@ -5,32 +5,40 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toolbar
+import androidx.fragment.app.DialogFragment
 import com.example.testandroid.R
 import com.example.testandroid.databinding.FragmentImageBinding
 import com.squareup.picasso.Picasso
 
 private const val PHOTO = "photo"
-class ImageFragment : Fragment() {
+class ImageFragment : DialogFragment() {
+
     private lateinit var binding: FragmentImageBinding
     private val photo: String by lazy { requireArguments().getString(PHOTO, "") }
+    private var toolbar: Toolbar? = null
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.AppTheme_FullScreenDialog)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val dialog = dialog
+        if (dialog != null){
+            val width = ViewGroup.LayoutParams.MATCH_PARENT
+            val height = ViewGroup.LayoutParams.MATCH_PARENT
+            dialog.window?.setLayout(width,height)
+            dialog.window?.setWindowAnimations(R.style.AppTheme_Slide)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentImageBinding.inflate(inflater)
-
-        Picasso.get()
-            .load(photo)
-            .into(binding.fullscreenImage)
-
-        binding.backButton.setOnClickListener {
-            val activity = activity as MainActivity
-            activity.supportFragmentManager.beginTransaction().remove(this).commit()
-            activity.onBackPressed()
-        }
 
         return binding.root
     }
